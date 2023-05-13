@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from enum import Enum, auto
 from werkzeug.security import generate_password_hash, check_password_hash
 
-db = SQLAlchemy
+db = SQLAlchemy()
 
 
 class TaskPriority(Enum):
@@ -72,7 +72,7 @@ class Task(db.Model):
     title = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     initial_date = db.Column(db.Date, nullable=False)
-    scheduled_date = db.Column(db.Datetime, nullable=False)
+    scheduled_date = db.Column(db.DateTime, nullable=False)
     priority = db.Column(db.Enum(TaskPriority), nullable=False)
     type = db.Column(db.Enum(TaskType), nullable=False)
     status = db.Column(db.Enum(ObjectStatus), nullable=False)
@@ -86,3 +86,4 @@ class Task(db.Model):
         if not self.id:
             db.session.add(self)
         db.session.commit()
+
